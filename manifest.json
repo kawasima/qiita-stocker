@@ -1,0 +1,17 @@
+﻿{
+   "content_scripts": [ {
+      "js": [ "stock.js" ],
+      "matches": [ "http://qiita.com/*" ]
+   } ],
+   "permissions": [ "https://qiita.com/" ],
+   "background": {
+      "persistent": false,
+      "scripts": [ "background.js" ]
+  },
+   "description": "Enable to stock at Qiita",
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoGa76eR6xLLYrWg+dklyhp7XHQH0YW75UaSddapo0E/N0WFgV76zOeHBCOLjCcC4CahxPR/kYpnGTwkljAWeJuMKeIHUF2MMDq9LlRxdEWEUVpJebD4aPBgKr8eThVca6+38aNqCsQccl+ZcIu/zITo4GqSsWczH/dgnCZIUXp8mE066fqncxHfCYud4ZI+mHgQpXwMcUnL+j2sCTzeVN9/1hI+N+Rx3Cg3Fnwu12+ZMqJ7W64NCCW127xYlds+fZiz4surNPBNT3BJb3v2QNOJ5iX4kRw1bcs6iCrsZis12VXe6SSehgF3mPRGxPbIJ+rZE9fp4BErJv6vO4DAjlQIDAQAB",
+   "manifest_version": 2,
+   "name": "Qiita stocker",
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.1.0"
+}
