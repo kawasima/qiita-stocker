@@ -1,28 +1,22 @@
-
-
-Array.prototype.forEach.call(document.querySelectorAll(".itemStockButton.js-stockButton"), function (elem) {
+var stockButtons = document.querySelectorAll(".StockButton");
+Array.prototype.forEach.call(stockButtons, function (stockButton) {
     // Qiitaの登録したイベントを解除
-    elem.classList.remove("js-stockButton");
-    elem.addEventListener("click", function (evt) {
+    stockButton.classList.remove("js-stockButton");
+    stockButton.addEventListener("click", function (evt) {
         evt.preventDefault();
-        var authTokenInput = elem.querySelector("input[name=authenticity_token]");
+        var authTokenInput = document.querySelector("input[name=authenticity_token]");
         if (authTokenInput) {
-            var isStocked = elem.classList.contains("stocked");
-            var url = "https://" + location.host + elem.getAttribute("data-path") + "/" + (isStocked ? "unstock" : "stock");
-            var authenticity_token = authTokenInput.value;
+            var isStocked = stockButton.classList.contains("StockButton--stocked");
+            var url = "https://" + location.host + stockButton.getAttribute("data-path") + "/" + (isStocked ? "unstock" : "stock");
             chrome.runtime.sendMessage({
                 method: "HttpRequest",
+                httpMethod: "POST",
                 url: url,
-                authenticity_token: authenticity_token
+                authenticity_token: authTokenInput.value
             }, function(response) {
                 if (response.isSuccess) {
-                    elem.classList.toggle("stocked");
-                    Array.prototype.forEach.call(document.querySelectorAll(".js-stocksCount"), function (elem) {
-                        var count = parseInt(elem.innerText);
-                        if (!isNaN(count)) {
-                            // ストックしてる状態→解除で-1
-                            elem.innerText = count + (isStocked ? -1 : 1);
-                        }
+                    Array.prototype.forEach.call(stockButtons, function (stockButton) {
+                        stockButton.classList.toggle("StockButton--stocked");
                     });
                 } else {
                     console.warn((isStocked ? "ストック解除" : "ストック") + "に失敗しました");
