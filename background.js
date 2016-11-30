@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		data.append("authenticity_token", authenticity_token);
 
 		fetch(url, {
-			method: "POST",
+			method: request.httpMethod,
 			// Cookie（ログイン情報）を含める
 			credentials: "include",
 			body: data
@@ -15,6 +15,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 			// リダイレクトされてurlが変わっていたら失敗している
 			//   ※リダイレクトされた場合statusコードは最後のものだけ取得可能
 			// /stockは成功したら200, /unstockは成功したら204が返却される
+			// /likesはPOSTメソッドなら200, DELETEメソッドなら204が返却される
 			if ((response.status === 200 || response.status === 204) && response.url === url) {
 				sendResponse({
 					isSuccess: true
