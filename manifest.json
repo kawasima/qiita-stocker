@@ -6,7 +6,7 @@
    "description": "Enable to stock at Qiita",
 
    "content_scripts": [ {
-      "js": [ "stock.js" ],
+      "js": [ "stock.js", "like.js" ],
       "matches": [ "http://qiita.com/*" ]
    } ],
    "permissions": [ "https://qiita.com/" ],
