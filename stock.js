@@ -59,7 +59,6 @@ Array.prototype.forEach.call(likeButtons, function (likeButton) {
                         headerLikeCount.innerText = likeCount - 1;
                         footerLikeCount.innerText = likeCount - 1;
                     } else { // いいね
-                        likeButtons[1].querySelector(".LikeButton__balloon")
                         Array.prototype.forEach.call(likeButtons, function (likeButton) {
                             likeButton.querySelector(".p-button").classList.add("liked");
                             likeButton.querySelector(".fa.fa-fw").classList.remove("fa-thumbs-up");
